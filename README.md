@@ -1,5 +1,5 @@
 # Data serialization in C
-本项目用于测试常用的在C语言中的数据序列化库，都是最简单的示例文件，详细使用方法以及API请查看第三方的官方文档。
+本项目用于测试常用的在C语言中的数据序列化库，都是最简单的示例文件，详细使用方法以及API请查看第三方库的官方文档。
 
 ## 目录结构
 ```
@@ -10,8 +10,8 @@ data_serialization
  ├── CMakeLists.txt     // CMake 顶层文件
  ├── clean.sh
  ├── README.md
- ├── res // 测试数据
- ├── src // 测试源码目录
+ ├── res                // 测试数据
+ ├── src                // 测试源码目录
  │   ├── test_cJSON
  │   ├── test_easylogger
  │   ├── test_inih
