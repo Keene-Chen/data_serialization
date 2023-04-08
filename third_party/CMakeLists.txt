@@ -35,6 +35,20 @@ kc_add_library(cJSON_Utils SHARED cJSON/cJSON_Utils)
 ]]
 kc_add_library(yyjson SHARED yyjson/yyjson)
 
+#[[
+json_parser: https://github.com/Barenboim/json_parser
+Doc: https://ibireme.github.io/yyjson/doc/doxygen/html/
+]]
+add_library(json_parser SHARED "")
+target_sources(
+  json_parser
+  PRIVATE ${CMAKE_CURRENT_LIST_DIR}/json_parser/json_parser.c
+  PRIVATE ${CMAKE_CURRENT_LIST_DIR}/json_parser/rbtree.c
+  PUBLIC ${CMAKE_CURRENT_LIST_DIR}/json_parser/json_parser.h)
+target_include_directories(json_parser
+                           PUBLIC ${CMAKE_CURRENT_LIST_DIR}/json_parser)
+message(STATUS "${BoldMagenta}>>> json_parser.so >>>${ColourReset}")
+
 #[[ inih: https://github.com/benhoyt/inih ]]
 kc_add_library(inih SHARED inih/ini)
 
