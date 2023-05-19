@@ -14,3 +14,5 @@ function(add_test_file TEST_NAME TEST_FILE)
 endfunction()
 
 add_test_file(test_yyjson test_yyjson.c)
+add_test_file(test_read test_read.c)
+add_test_file(test_write test_write.c)
