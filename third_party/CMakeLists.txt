@@ -86,3 +86,14 @@ message(
   STATUS
     "${BoldBlue}>>> see also ${CMAKE_SOURCE_DIR}/src/test_easylogger >>>${ColourReset}"
 )
+
+#[[
+xlsxio: https://github.com/brechtsanders/xlsxio
+Note:
+]]
+find_library(XLSXIO_READ libxlsxio_read.so /usr/local/lib REQUIRED)
+find_library(XLSXIO_WRITE libxlsxio_write.so /usr/local/lib REQUIRED)
+message(
+  STATUS
+    "${BoldBlue}>>> ${XLSXIO_READ} >>>${ColourReset}"
+)

@@ -21,7 +21,7 @@ aux_source_directory(${CMAKE_SOURCE_DIR}/third_party/easylogger/port SRC_LIST)
 aux_source_directory(${CMAKE_SOURCE_DIR}/third_party/easylogger/src SRC_LIST)
 aux_source_directory(${CMAKE_SOURCE_DIR}/third_party/easylogger/plugins/file
                      SRC_LIST)
-message(STATUS "${BoldBlue}>>> ${SRC_LIST} >>>${ColourReset}")
+# message(STATUS "${BoldBlue}>>> ${SRC_LIST} >>>${ColourReset}")
 
 add_executable(test_easylogger test_easylogger.c ${SRC_LIST})
 add_executable(01_test 01_test.c ${SRC_LIST})
