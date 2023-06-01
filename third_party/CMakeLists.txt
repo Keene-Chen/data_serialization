@@ -88,12 +88,17 @@ message(
 )
 
 #[[
-xlsxio: https://github.com/brechtsanders/xlsxio
-Note:
+  xlsxio: https://github.com/brechtsanders/xlsxio
+  Note:
 ]]
 find_library(XLSXIO_READ libxlsxio_read.so /usr/local/lib REQUIRED)
 find_library(XLSXIO_WRITE libxlsxio_write.so /usr/local/lib REQUIRED)
-message(
-  STATUS
-    "${BoldBlue}>>> ${XLSXIO_READ} >>>${ColourReset}"
-)
+message(STATUS "${BoldBlue}>>> ${XLSXIO_READ} >>>${ColourReset}")
+
+#[[
+  xlsxio: https://www.libxl.com/home.html
+  Doc: https://www.libxl.com/documentation.html
+  Note: closed source and paid
+]]
+find_library(LIBXL libxl.so /usr/local/lib64 REQUIRED)
+message(STATUS "${BoldBlue}>>> ${LIBXL} >>>${ColourReset}")
