@@ -1,9 +1,11 @@
-project(
-  test_easylogger
-  VERSION 1.0.0
-  DESCRIPTION "test_easylogger")
+#[[
+# Author : KeeneChen
+# Date   : 2023.10.06-23:14:36
+]]
 
-# 设置可执行文件、库生成位置
+project(test_easylogger DESCRIPTION "test_easylogger")
+
+# 设置可执行文件生成位置
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin/${PROJECT_NAME})
 
 include_directories(

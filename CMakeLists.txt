@@ -1,63 +1,43 @@
 #[[
-  file    : data_serialization/CMakeLists.txt
-  author  : KeeneChen
-  date    : 2023.03.01-14:26:27
-  details : This is the top-level CMakeLists.txt for the project
-  github  : https://github.com/Keene-Chen/data_serialization
+# File    : data_serialization/CMakeLists.txt
+# Author  : KeeneChen
+# Date    : 2023.03.01-14:26:27
+# Details : This is the top-level CMakeLists.txt for the project
+# GitHub  : https://github.com/Keene-Chen/data_serialization
 ]]
 
-cmake_minimum_required(VERSION 3.10.0)
+cmake_minimum_required(VERSION 3.10...3.20)
 
 project(
-  test_cmake_template
-  VERSION 1.0.0
-  DESCRIPTION "test_cmake_template")
+  cmake_template
+  VERSION 1.0.1
+  DESCRIPTION "cmake_template"
+  LANGUAGES C)
 
-# 设置语言标准
-set(CMAKE_C_STANDARD 11)
-set(CMAKE_C_STANDARD_REQUIRED True)
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
-
-# 包括colors.cmake模块,调用其中定义的宏
+# 包括kc_conf.cmake模块,调用其中定义的宏
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
-include(colors)
-define_colors()
-
-# 设置默认构建类型
-if(NOT CMAKE_BUILD_TYPE)
-  if("${CMAKE_BINARY_DIR}" MATCHES "build_.*(D|d)ebug$")
-    message(STATUS "${Red}>>> Build Debug Type >>>${ColourReset}")
-    set(CMAKE_BUILD_TYPE "Debug")
-  elseif("${CMAKE_BINARY_DIR}" MATCHES "build_.*(R|r)elWithDebInfo$")
-    message(STATUS "${Green}>>> Build RelWithDebInfo Type >>>${ColourReset}")
-    set(CMAKE_BUILD_TYPE "RelWithDebInfo")
-  elseif("${CMAKE_BINARY_DIR}" MATCHES "build_.*(M|m)inSizeRel$")
-    message(STATUS "${Blue}>>> Build MinSizeRel Type>>>${ColourReset}")
-    set(CMAKE_BUILD_TYPE "MinSizeRel")
-  else()
-    message(STATUS "${BoldYellow}>>> Build Release Type >>>${ColourReset}")
-    set(CMAKE_BUILD_TYPE "Release")
-  endif()
-endif()
-
-# 导出编译命令配置,供clangd使用
-set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
+include(kc_conf)
+enable_kc_colors()
+enable_kc_debug()
 
 # 开启测试
 enable_testing()
 
 # 添加子目录
+set(SUBDIR
+    test_cJSON
+    test_yyjson
+    test_json_parser
+    test_inih
+    test_rxi_ini
+    test_rxi_log
+    test_easylogger
+    test_libyaml
+    test_libxml2
+    test_protobuf-c
+    test_xlsxio
+    test_libxl)
 add_subdirectory(third_party)
-add_subdirectory(src/test_cJSON)
-add_subdirectory(src/test_yyjson)
-add_subdirectory(src/test_json_parser)
-add_subdirectory(src/test_inih)
-add_subdirectory(src/test_rxi_ini)
-add_subdirectory(src/test_rxi_log)
-add_subdirectory(src/test_easylogger)
-add_subdirectory(src/test_libyaml)
-add_subdirectory(src/test_libxml2)
-add_subdirectory(src/test_protobuf-c)
-add_subdirectory(src/test_xlsxio)
-add_subdirectory(src/test_libxl)
+foreach(index ${SUBDIR})
+  add_subdirectory(src/${index})
+endforeach()

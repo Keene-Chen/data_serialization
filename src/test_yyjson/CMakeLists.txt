@@ -1,18 +1,17 @@
-project(
-  test_yyjson
-  VERSION 1.0.0
-  DESCRIPTION "test_yyjson")
+#[[
+# Author : KeeneChen
+# Date   : 2023.10.06-23:16:51
+]]
 
-# 设置可执行文件、库生成位置
+project(test_yyjson DESCRIPTION "test_yyjson")
+
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin/${PROJECT_NAME})
 
-# 自定义函数,将生成可执行文件和链接操作合并
-function(add_test_file TEST_NAME TEST_FILE)
-  string(APPEND TEST_NAME "_demo")
-  add_executable(${TEST_NAME} ${TEST_FILE})
-  target_link_libraries(${TEST_NAME} PRIVATE yyjson)
+function(add_exec BIN_NAME BIN_FILE)
+  add_executable(${BIN_NAME} ${BIN_FILE})
+  target_link_libraries(${BIN_NAME} PRIVATE yyjson)
 endfunction()
 
-add_test_file(test_yyjson test_yyjson.c)
-add_test_file(test_read test_read.c)
-add_test_file(test_write test_write.c)
+add_exec(test_yyjson test_yyjson.c)
+add_exec(test_read test_read.c)
+add_exec(test_write test_write.c)

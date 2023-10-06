@@ -1,16 +1,15 @@
-project(
-  test_rxi_ini
-  VERSION 1.0.0
-  DESCRIPTION "test_rxi_ini")
+#[[
+# Author : KeeneChen
+# Date   : 2023.10.06-23:16:17
+]]
 
-# 设置可执行文件、库生成位置
+project(test_rxi_ini DESCRIPTION "test_rxi_ini")
+
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin/${PROJECT_NAME})
 
-# 自定义函数,将生成可执行文件和链接操作合并
-function(add_test_file TEST_NAME TEST_FILE)
-  string(APPEND TEST_NAME "_demo")
-  add_executable(${TEST_NAME} ${TEST_FILE})
-  target_link_libraries(${TEST_NAME} PRIVATE rxi_ini)
+function(add_exec BIN_NAME BIN_FILE)
+  add_executable(${BIN_NAME} ${BIN_FILE})
+  target_link_libraries(${BIN_NAME} PRIVATE rxi_ini)
 endfunction()
 
-add_test_file(test_rxi_ini test_rxi_ini.c)
+add_exec(test_rxi_ini test_rxi_ini.c)

@@ -1,14 +1,10 @@
 #[[
-  file    : third_party/CMakeLists.txt
-  author  : KeeneChen
-  date    : 2023.03.01-14:26:27
-  details : This is the CMakeLists.txt for submodules of third-party libraries
+# Author : KeeneChen
+# Date   : 2023.10.06-23:03:31
+# details : This is the CMakeLists.txt for submodules of third-party libraries
 ]]
 
-project(
-  test_3rd
-  VERSION 1.0.0
-  DESCRIPTION "test_3rd")
+project(test_3rd DESCRIPTION "test_3rd")
 
 # Custom functions are used to compile third-party libraries
 function(kc_add_library LIB_NAME LIB_TYPE LIB_PATH)
@@ -19,7 +15,7 @@ function(kc_add_library LIB_NAME LIB_TYPE LIB_PATH)
     PUBLIC ${CMAKE_CURRENT_LIST_DIR}/${LIB_PATH}.h)
   target_include_directories(${LIB_NAME}
                              PUBLIC ${CMAKE_CURRENT_LIST_DIR}/${LIB_NAME})
-  message(STATUS "${BoldMagenta}>>> ${LIB_NAME}.so >>>${ColourReset}")
+  kc_message(cyan ${LIB_NAME}.so)
 endfunction(kc_add_library)
 
 #[[
@@ -47,7 +43,7 @@ target_sources(
   PUBLIC ${CMAKE_CURRENT_LIST_DIR}/json_parser/json_parser.h)
 target_include_directories(json_parser
                            PUBLIC ${CMAKE_CURRENT_LIST_DIR}/json_parser)
-message(STATUS "${BoldMagenta}>>> json_parser.so >>>${ColourReset}")
+kc_message(cyan json_parser.so)
 
 #[[ inih: https://github.com/benhoyt/inih ]]
 kc_add_library(inih SHARED inih/ini)
@@ -64,28 +60,25 @@ target_compile_definitions(rxi_log PRIVATE -DLOG_USE_COLOR)
   Doc: https://pyyaml.org/wiki/LibYAML
 ]]
 find_library(yaml libyaml.a /usr/local/lib REQUIRED)
-message(STATUS "${BoldMagenta}>>> ${yaml} >>>${ColourReset}")
+kc_message(cyan ${yaml})
 
 #[[
   libxml2: https://github.com/GNOME/libxml2
   Doc: https://gitlab.gnome.org/GNOME/libxml2/-/wikis/home
 ]]
 find_package(LibXml2 REQUIRED)
-message(STATUS "${BoldMagenta}>>> ${LibXml2} >>>${ColourReset}")
+# kc_message(cyan ${LibXml2})
 
 #[[ protobuf-c: https://github.com/protobuf-c/protobuf-c ]]
 find_library(protobuf-c libprotobuf-c.so /usr/lib64)
-message(STATUS "${BoldBlue}>>> ${protobuf-c} >>>${ColourReset}")
+kc_message(cyan ${protobuf-c})
 
 #[[
   EasyLogger: https://github.com/armink/EasyLogger
   Doc: https://github.com/armink/EasyLogger/tree/master/docs/zh
   Note: This library needs to be configured by yourself
 ]]
-message(
-  STATUS
-    "${BoldBlue}>>> see also ${CMAKE_SOURCE_DIR}/src/test_easylogger >>>${ColourReset}"
-)
+kc_msg("see also ${CMAKE_SOURCE_DIR}/src/test_easylogger")
 
 #[[
   xlsxio: https://github.com/brechtsanders/xlsxio
@@ -93,7 +86,7 @@ message(
 ]]
 find_library(XLSXIO_READ libxlsxio_read.so /usr/local/lib REQUIRED)
 find_library(XLSXIO_WRITE libxlsxio_write.so /usr/local/lib REQUIRED)
-message(STATUS "${BoldBlue}>>> ${XLSXIO_READ} >>>${ColourReset}")
+kc_message(cyan ${XLSXIO_READ})
 
 #[[
   xlsxio: https://www.libxl.com/home.html
@@ -101,4 +94,4 @@ message(STATUS "${BoldBlue}>>> ${XLSXIO_READ} >>>${ColourReset}")
   Note: closed source and paid
 ]]
 find_library(LIBXL libxl.so /usr/local/lib64 REQUIRED)
-message(STATUS "${BoldBlue}>>> ${LIBXL} >>>${ColourReset}")
+kc_message(cyan ${LIBXL})
