@@ -12,4 +12,4 @@ function(add_exec BIN_NAME BIN_FILE)
   target_link_libraries(${BIN_NAME} PRIVATE json_parser)
 endfunction()
 
-add_exec(test test.c)
+add_exec(test1 test.c)
