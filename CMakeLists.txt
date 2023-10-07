@@ -23,19 +23,26 @@ enable_kc_debug()
 # 开启测试
 enable_testing()
 
+# 获取上级目录的名称并设置生成二进制文件路径
+macro(set_bin_dir)
+  get_filename_component(PARENT_DIR ${CMAKE_CURRENT_LIST_DIR} DIRECTORY)
+  get_filename_component(PARENT_DIR_NAME ${PARENT_DIR} NAME)
+  set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin/${PARENT_DIR_NAME})
+endmacro()
+
 # 添加子目录
 set(SUBDIR
-    test_cJSON
+    # test_cJSON
     test_yyjson
-    test_json_parser
-    test_inih
-    test_rxi_ini
-    test_rxi_log
-    test_easylogger
-    test_libyaml
-    test_libxml2
-    test_protobuf-c
-    test_xlsxio
+    # test_json_parser
+    # test_inih
+    # test_rxi_ini
+    # test_rxi_log
+    # test_easylogger
+    # test_libyaml
+    # test_libxml2
+    # test_protobuf-c
+    # test_xlsxio
     test_libxl)
 add_subdirectory(third_party)
 foreach(index ${SUBDIR})

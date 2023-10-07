@@ -1,10 +1,15 @@
 #[[
 # Author : KeeneChen
 # Date   : 2023.10.06-23:03:31
-# details : This is the CMakeLists.txt for submodules of third-party libraries
+# Details : This is the CMakeLists.txt for submodules of third-party libraries
 ]]
 
 project(test_3rd DESCRIPTION "test_3rd")
+
+# 添加检查头文件宏
+include(CheckIncludeFile)
+include(CheckIncludeFiles)
+include(CheckSymbolExists)
 
 # Custom functions are used to compile third-party libraries
 function(kc_add_library LIB_NAME LIB_TYPE LIB_PATH)
@@ -29,8 +34,9 @@ kc_add_library(cJSON_Utils SHARED cJSON/cJSON_Utils)
   yyjson: https://github.com/ibireme/yyjson
   Doc: https://ibireme.github.io/yyjson/doc/doxygen/html/
 ]]
-# kc_add_library(yyjson SHARED yyjson/yyjson)
+kc_add_library(yyjson SHARED yyjson/yyjson)
 
+#[[
 # Let CMake download yyjson
 include(FetchContent)
 FetchContent_Declare(
@@ -43,10 +49,12 @@ if(NOT yyjson_POPULATED)
   FetchContent_Populate(yyjson)
   add_subdirectory(${yyjson_SOURCE_DIR} ${yyjson_BINARY_DIR} EXCLUDE_FROM_ALL)
 endif()
+]]
+check_include_file("yyjson.h" HAS_YYJSON_H)
 
 #[[
-json_parser: https://github.com/Barenboim/json_parser
-Doc: https://ibireme.github.io/yyjson/doc/doxygen/html/
+  json_parser: https://github.com/Barenboim/json_parser
+  Doc: https://github.com/Barenboim/json-parser
 ]]
 add_library(json_parser SHARED "")
 target_sources(
